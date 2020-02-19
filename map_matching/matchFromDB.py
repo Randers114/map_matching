@@ -69,11 +69,12 @@ def get_trip_match(start=date(2012, 11, 19), end=None):
 
         if not db.exists(table_name):
             break
-
+        
         df = db.query(f'SELECT * FROM public."{table_name}"')
 
         print(f'\n{datetime.now()} - {len(df.index)} rows fetched from {table_name}')
-        
+                
+        # Change this such that your df has the the right column-names. 
         df["Timestamp"] = df['LokalTid'].map(lambda t: int(datetime.combine(start, t).timestamp()))
 
         start += delta
